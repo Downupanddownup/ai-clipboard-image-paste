@@ -4,10 +4,13 @@
 Persistent
 
 global CacheDir := EnvGet("USERPROFILE") "\.ai-clipboard-image-cache"
+global RetentionDays := 1
 global PowerShellScript := A_ScriptDir "\Save-ClipboardImageToAiCache.ps1"
 global PowerShellExe := A_WinDir "\System32\WindowsPowerShell\v1.0\powershell.exe"
 
 A_IconTip := "AI Clipboard Image Paste"
+
+CleanupOldCacheFiles()
 
 ^+v::HandleEnhancedPaste()
 
@@ -62,4 +65,24 @@ ClipboardHasImage() {
     return DllCall("IsClipboardFormatAvailable", "UInt", CF_BITMAP, "Int")
         || DllCall("IsClipboardFormatAvailable", "UInt", CF_DIB, "Int")
         || DllCall("IsClipboardFormatAvailable", "UInt", CF_DIBV5, "Int")
+}
+
+CleanupOldCacheFiles() {
+    global CacheDir
+    global RetentionDays
+
+    if (RetentionDays <= 0) {
+        return
+    }
+
+    if !DirExist(CacheDir) {
+        return
+    }
+
+    cutoff := DateAdd(A_Now, -RetentionDays, "Days")
+    loop files, CacheDir "\shot-*.png", "F" {
+        if (A_LoopFileTimeModified < cutoff) {
+            try FileDelete(A_LoopFileFullPath)
+        }
+    }
 }
