@@ -1,0 +1,4 @@
+1，你的脚本不能写在本项目的目录下，必须写在C盘吗？
+    有没有可能把脚本放在D:\PersonWorkSpace\PasePictureForKimiCodeAndClaudeCode\script下呢？
+    我还想上传github做维护呢
+

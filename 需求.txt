@@ -1,0 +1,21 @@
+当前claude code、kimi code不支持直接粘贴图片，比如我利用截图工具完成截图，然后粘贴到终端
+
+系统 windows
+claude code 运行环境： powershell 5
+kimi code 运行环境： powershell 7
+
+解决思路，首先利用一种通用能力，将剪贴板中，如果是图片的话，把图片保存到一个可清理的临时目录中，
+然后在ctrl+v时，将图片路径放进去。或者也可以换一个快捷键。
+
+要求：
+1，不要有副作用，不要影响正常的文字粘贴
+2，不要影响站体图片到codex，因为codex支持原生的粘贴截图
+3，只在我需要将截图转化为本地路径时才触发
+4，不要覆盖掉别的快捷键
+5，要方便好用
+
+这是chatgpt给我出的方案，你认为它正确吗？
+D:\PersonWorkSpace\PasePictureForKimiCodeAndClaudeCode\chatgpt方案.md
+
+把你的想法写入v1，md文档格式
+
